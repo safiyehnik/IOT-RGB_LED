@@ -5,8 +5,8 @@
 #include<Adafruit_NeoPixel.h>
 
 
-const char* ssid="TP-LINK_8E8C48";
-const char* password="1393heliya";
+const char* ssid="***********";
+const char* password="*******";
 int PIN=14;
 int NUM_LEDS=7;
 
