@@ -3,9 +3,12 @@
 #include<ESP8266mDNS.h>
 #include"SSD1306.h"
 #include<Adafruit_NeoPixel.h>
+#include"index.h"
+#include"index_css.h"
+#include"test_RGB_css.h"
+#include"index_js.h"
 
-
-const char* ssid="***********";
+const char* ssid="*******";
 const char* password="*******";
 int PIN=14;
 int NUM_LEDS=7;
@@ -51,9 +54,13 @@ server.begin();
 Serial.println("HTTP Server Started");
 server.on("/",Handle_Root);
 server.on("/RGB",Handle_RGB);
+server.on("/index.css",[](){server.send(200,"text/html",indexcss);});
+server.on("/test_RGB.css",[](){server.send(200,"text/html",testRGBcss);});
+server.on("/index.js",[](){server.send(200,"aplication/javascript",indexjs);});
+
+
 
 }
-
 
 void loop() {
  server.handleClient();
@@ -61,9 +68,11 @@ void loop() {
 }
 
 void Handle_Root(){
-  server.send(200,"text/plain","Test RGB LEDS");
+  server.send(200,"text/html",index_page);
    
 }
+
+
 
 void Handle_RGB(){
   String RED = server.arg("Red");
